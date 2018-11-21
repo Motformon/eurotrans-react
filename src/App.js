@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import MainPage from './containers/MainPage/MainPage';
+import Booking from './containers/Booking/Booking';
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
+
 
 class App extends Component {
   render() {
+
+		// let routes = (
+
+		// )
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src='' className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+			<Switch>
+				<Route path="/booking" component={Booking} />
+				<Route path="/" exact component={MainPage} />
+				<Redirect to="/" />
+			</Switch>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
