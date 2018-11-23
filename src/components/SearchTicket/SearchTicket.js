@@ -1,7 +1,15 @@
 import React  from "react";
 import Input from "../UI/Input/Input";
 
-const SearchTicket = (props) => (
+
+
+const SearchTicket = (props) => {
+	console.log(props.destinationFrom);
+	// const qwe = props.destinationFrom.map((elem, index) => 
+	// 		<li className="booking-form__option booking-form__option_cities text text_regular">{elem.name}</li>
+	// );
+	
+	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
 		<div className="booking-form__container" id="cityFromHeader">
 			<Input
@@ -11,9 +19,7 @@ const SearchTicket = (props) => (
 				classInput={"booking-form__input booking-form__input_select"}
 			/>
 			<ul className="booking-form__cities-list">
-			
-							<li className="booking-form__option booking-form__option_cities text text_regular"></li>
-		
+				{/* { qwe } */}
 			</ul>
 		</div>
 		<div className="booking-form__container" id="cityToHeader">
@@ -59,6 +65,6 @@ const SearchTicket = (props) => (
 				<button className="booking-form__button button button_theme_red text text_regular">Найти билеты</button>
 		</p>
 	</form>
-);
+)};
 
 export default SearchTicket;
