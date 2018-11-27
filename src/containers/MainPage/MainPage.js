@@ -6,7 +6,8 @@ import axios from 'axios';
 class MainPage extends Component {
 
 	state = {
-		
+		destinationFrom: [],
+		destinationTo: []
 	}
 
   async componentDidMount() {

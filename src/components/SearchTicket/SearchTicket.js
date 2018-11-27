@@ -4,10 +4,28 @@ import Input from "../UI/Input/Input";
 
 
 const SearchTicket = (props) => {
-	console.log(props.destinationFrom);
-	// const qwe = props.destinationFrom.map((elem, index) => 
-	// 		<li className="booking-form__option booking-form__option_cities text text_regular">{elem.name}</li>
-	// );
+
+	const destinationFrom = props.destinationFrom;
+	const destinationTo = props.destinationTo;
+	                          
+
+	const destinationFromList = destinationFrom.map((elem, index) => 
+			<li 
+				key={ index.toString() } 
+				className="booking-form__option booking-form__option_cities text text_regular"
+			>
+				{elem.name}
+			</li>
+	); 
+
+	const destinationToList = destinationTo.map((elem, index) => 
+			<li 
+				key={ index.toString() } 
+				className="booking-form__option booking-form__option_cities text text_regular"
+			>
+				{elem.name}
+			</li>
+	); 
 	
 	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
@@ -19,7 +37,7 @@ const SearchTicket = (props) => {
 				classInput={"booking-form__input booking-form__input_select"}
 			/>
 			<ul className="booking-form__cities-list">
-				{/* { qwe } */}
+				{ destinationFromList }
 			</ul>
 		</div>
 		<div className="booking-form__container" id="cityToHeader">
@@ -31,7 +49,7 @@ const SearchTicket = (props) => {
 			/>
 			<ul className="booking-form__cities-list">
 				
-							<li className="booking-form__option booking-form__option_cities text text_regular"></li>
+			{ destinationToList }
 				
 			</ul>
 		</div>
