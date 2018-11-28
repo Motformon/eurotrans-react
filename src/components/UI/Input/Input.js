@@ -21,6 +21,7 @@ const Input = props => {
 				{props.label}
 			</label>
 			<input
+				onFocus={props.onFocusListShowHandler}
 				className={props.classInput}
 				type={inputType}
 				id={htmlFor}

@@ -494,12 +494,7 @@
 
     <script src="js/flatpickr.min.js"></script>
     <script>
-        flatpickr('#dateHeader', {
-            enableTime: false,
-            dateFormat: 'd-m-Y',
-            time_24hr: true,
-            locale: 'ru'
-        });
+
         flatpickr('#dateFooter', {
             enableTime: false,
             dateFormat: 'd-m-Y',

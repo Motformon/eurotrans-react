@@ -27,7 +27,8 @@ class MainPage extends Component {
     } catch (e) {
       console.log(e)
     }
-  }
+	}
+
 
 
 	render() {
@@ -308,11 +309,11 @@ class MainPage extends Component {
 
 
         </section>
-				<section class="booking page__booking">
-            <header class="booking__header">
-                <h2 class="booking__title text text_semibold">Забронируй и оплатите билет сейчас</h2>
+				<section className="booking page__booking">
+            <header className="booking__header">
+                <h2 className="booking__title text text_semibold">Забронируй и оплатите билет сейчас</h2>
             </header>
-						<section class="booking__container">
+						<section className="booking__container">
 							<SearchTicket
 								destinationFrom = {this.state.destinationFrom}
 								destinationTo = {this.state.destinationTo}
@@ -320,31 +321,31 @@ class MainPage extends Component {
 						</section>
 				</section>
 				</main>
-				<footer class="main-footer page__main-footer">
-					<section class="main-footer__top">
-							<h2 class="visually-hidden">Верхняя секция основного подвала страницы</h2>
-							<a class="logo main-footer__logo" href="/">
-								<img class="logo__image" src="img/logo.png"/>
+				<footer className="main-footer page__main-footer">
+					<section className="main-footer__top">
+							<h2 className="visually-hidden">Верхняя секция основного подвала страницы</h2>
+							<a className="logo main-footer__logo" href="/">
+								<img className="logo__image" src="img/logo.png"/>
 							</a>
-							<section class="additional-menu main-footer__company">
-									<h3 class="additional-menu__title text text_semibold">O компании</h3>
-									<ul class="additional-menu__list">
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">О нас</a></li>
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Договор оферты</a></li>
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Политика конфиденциальности</a></li>
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Контакты</a></li>
+							<section className="additional-menu main-footer__company">
+									<h3 className="additional-menu__title text text_semibold">O компании</h3>
+									<ul className="additional-menu__list">
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">О нас</a></li>
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Договор оферты</a></li>
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Политика конфиденциальности</a></li>
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Контакты</a></li>
 									</ul>
 							</section>
-							<section class="additional-menu main-footer__company">
-									<h3 class="additional-menu__title text text_semibold">Пользователям</h3>
-									<ul class="additional-menu__list">
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Вопросы и ответы</a></li>
-											<li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Купить билеты</a></li>
+							<section className="additional-menu main-footer__company">
+									<h3 className="additional-menu__title text text_semibold">Пользователям</h3>
+									<ul className="additional-menu__list">
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Вопросы и ответы</a></li>
+											<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Купить билеты</a></li>
 									</ul>
-							</section><a class="contacts contacts_footer main-footer__contacts" href="tel:8800121212"><span class="contacts__content text text_regular">Наш номер телефона</span><span class="contacts__phone text text_semibold">8-800-123-12-12</span></a>
+							</section><a className="contacts contacts_footer main-footer__contacts" href="tel:8800121212"><span className="contacts__content text text_regular">Наш номер телефона</span><span className="contacts__phone text text_semibold">8-800-123-12-12</span></a>
 					</section>
-					<section class="main-footer__copyright">
-							<h2 class="visually-hidden">Секция с копирайтами</h2>
+					<section className="main-footer__copyright">
+							<h2 className="visually-hidden">Секция с копирайтами</h2>
 					</section>
 				</footer>
 			</div>
