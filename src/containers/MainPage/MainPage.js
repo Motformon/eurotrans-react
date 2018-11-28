@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SearchTicket from '../../components/SearchTicket/SearchTicket';
 import axios from 'axios';
+import RoutesMainPage from '../../components/RoutesMainPage/RoutesMainPage';
 // import classes from './MainPage.scss';
 
 class MainPage extends Component {
@@ -55,83 +56,9 @@ class MainPage extends Component {
 				
 				</header>
 				<main className="page__main">
-					<section className="routes page__routes">
-							<h1 className="routes__title text text_semibold">Популярные направления</h1>
-							<ul className="routes__list">
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/routes-bg.jpg")'}}>
-													<h2 className="route__title text text_semibold">Ставрополь - Москва</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">12:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">17:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/stavropol.jpg")'}}>
-													<h2 className="route__title text text_semibold">Москва - Ставрополь</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">13:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">20:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/routes-bg.jpg")'}}>
-													<h2 className="route__title text text_semibold">Нефтекумск - Москва</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">16:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">18:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/Neftekumsk.jpg")'}}>
-													<h2 className="route__title text text_semibold">Москва - Нефтекумск</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">12:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">17:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/Budenovsk.jpg")'}}>
-													<h2 className="route__title text text_semibold">Будденовск - Москва</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">13:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">20:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-									<li className="routes__item">
-											<article className="route routes__article" style={{backgroundImage: 'url("../img/Levokum.jpg")'}}>
-													<h2 className="route__title text text_semibold">Левокумское - Москва</h2>
-													<p className="route__sending text text_regular">Отправление</p>
-													<ul className="route__list">
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">09:00</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">16:30</span></li>
-															<li className="route__item text text_regular"><span className="route__date">08.06 |</span><span className="route__time">18:00</span></li>
-													</ul>
-													<p className="route__price text text_semibold">От 2260р.</p><a className="route__booking button button_theme_blue text text_semibold" href="booking.html">Забронировать</a>
-											</article>
-									</li>
-							</ul>
-					</section>
+				<section className="routes page__routes">
+					<RoutesMainPage/>
+				</section>
 					<section className="advantage page__advantage">
 						<h1 className="advantage__title text text_semibold">Преимущество бронирования у нас</h1>
 							<div className="swiper-container">
@@ -319,6 +246,11 @@ class MainPage extends Component {
 								destinationTo = {this.state.destinationTo}
 							/>
 						</section>
+				</section>
+				<section class="address">
+					<div class="address__map">
+						<div id="map" class="address__item-map"></div>	
+					</div>
 				</section>
 				</main>
 				<footer className="main-footer page__main-footer">

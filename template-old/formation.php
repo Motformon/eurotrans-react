@@ -2,53 +2,17 @@
 error_reporting(E_ALL);
 
 ini_set('display_errors', 'on');
-
 $arPostData = array();
 foreach ($_POST as $key => $post)
 {
     $arPostData[$key] = $post;
 }
-echo '<pre>';print_r($arPostData);echo '</pre>';
+//echo '<pre>';print_r($arPostData);echo '</pre>';
 if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostData['children'] = 0;
-
    $passenger = $arPostData['adult'] + $arPostData['children'];
-
-
-//$getRoute = "SELECT `price_do` FROM `ways` WHERE id = ?";
-//$createTransaction = "INSERT INTO `transaction` (`status`, `amount`, `date_created`,`date_changed`,`transaction_id`,`count_adult`,`count_children`,`count_baby`) VALUES ('created', ?, NOW(), NOW(), NULL, ?, ?, ?)";
-
-//$data = getData($db, $getRoute, [$idRoute]);
-//$data = explode(":", $data[0]['price_do']);
-
-//$mainPrice = $data[0];
-//$minPrice = $data[1];
-
-//$price = ($minPrice * $adult) + ($minPrice * $children);
-
-//executeQuery($db, $createTransaction, [$price, $adult, $children, $baby])
 ?>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>EuroTrans | Бронирование и покупка билета</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="css/style.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-
-<body class="page page_inner">
-<header class="main-header main-header_booking">
-  <div class="main-header__top"><a class="logo main-header__logo" href="/"><img class="logo__image" src="img/logo.png"></a>
-    <ul class="breadcrumbs">
-      <li class="breadcrumbs__item text text_regular">Выбор</li>
-      <li class="breadcrumbs__item breadcrumbs__item_active text text_regular">Оформление</li>
-      <li class="breadcrumbs__item text text_regular">Оплата</li>
-    </ul>
-  </div>
-</header>
+<?require_once $_SERVER['DOCUMENT_ROOT']."/views/header.php";?>
 <main class="page__main">
 
   <section class="execution" id="app">
@@ -84,11 +48,11 @@ if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostD
           <p class="formation__container formation__container_sex">
             <span class="formation__label_sex">Пол</span>
 
-            <input type="radio" checked id="male-<?= $i ?>" name="sex-<?= $i ?>"
+            <input type="radio" checked id="male-<?= $i ?>" value="1" name="sex-<?= $i ?>"
                    class="formation__input formation__input_radio text text_regular">
 
             <label for="male-<?= $i ?>" class="formation__label formation__label_sex_male text text_regular">Муж</label>
-            <input type="radio" id="women-<?= $i ?>" name="sex-<?= $i ?>" class="formation__input formation__input_radio text text_regular">
+            <input type="radio" id="women-<?= $i ?>" name="sex-<?= $i ?>" value="0" class="formation__input formation__input_radio text text_regular">
 
             <label for="women-<?= $i ?>" class="formation__label formation__label_sex_female text text_regular">Жен</label>
 
@@ -96,35 +60,47 @@ if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostD
 
           <div class="formation__container formation__container_list" id="nationalityComponent-<?= $i ?>">
             <label for="nationality-<?= $i ?>" class="formation__label text text_regular">Гражданство</label>
-            <input id="nationality-<?= $i ?>" name="nationality-<?= $i ?>" placeholder="Выберите страну"
+            <!-- <input id="nationality-<?= $i ?>" name="nationality-<?= $i ?>" placeholder="Выберите страну"
                    class="formation__input text text_regular"
-                   v-on:click="showCountry" v-model="country" required autocomplete="off">
+									 v-on:click="showCountry" v-model="country" required autocomplete="off"> -->
+						<input id="countryNumber-<?= $i ?>" class='formation__country-input' type="text" name='countryNumber-<?= $i ?>' v-model='countryNumber' required>
+						<div class="formation__country-title formation__input text text_regular" v-on:click="showCountry">
+							<span class="formation__country-title--text">{{countryName}}</span>
+						</div>			 
             <ul class="formation__list" v-if="isCountryList">
-              <li class="formation__item text text_regular" v-for="country in nationalityList" v-on:click="selectCountry">
-                {{country}}
+              <li class="formation__item text text_regular" v-for="(country, index) in nationalityList" v-on:click="selectCountry($event, index)">
+                {{country.SHORTNAME}}
+
               </li>
-            </ul>
+						</ul>
+
           </div>
-
           <div class="formation__container formation__container_list" id="documentsComponent-<?= $i ?>">
-            <label for="document-<?= $i ?>" class="formation__label text text_regular">Документ</label>
-            <input id="document-<?= $i ?>" name="document-<?= $i ?>" placeholder="Выберите документ"
+						<label for="documentName-<?= $i ?>" class="formation__label text text_regular">Документ</label>
+						<input id="documentNumber-<?= $i ?>" class='formation__document-input' type="text" name='documentNumber-<?= $i ?>' v-model='documentNumber' required>
+            <!-- <input id="documentName" name="documentName-<?= $i ?>" placeholder="Выберите документ"
                    class="formation__input text text_regular"
-                   v-on:click="showDocuments" v-model="document" required autocomplete="off">
-
+										v-model="documentName" required autocomplete="off"> -->
+										
+						<div class="formation__document-title formation__input text text_regular" v-on:click="showDocuments">
+							<span class="formation__document-title--text">{{documentName}}</span>
+						</div>
             <ul class="formation__list" v-if="showDocumentList">
-              <li class="formation__item text text_regular" v-for="document in documentsList"
-                  v-on:click="selectDocuments">
-                {{document}}
+              <li class="formation__item text text_regular" v-for="(document, index) in documentsList"
+									v-on:click="selectDocuments($event, index)">
+								
+                {{document.name}}
               </li>
-            </ul>
+						</ul>
+						
+		
 
           </div>
 
           <p class="formation__container">
             <label for="numberDocument-<?= $i ?>" class="formation__label text text_regular">Номер документа</label>
-            <input type="text" id="numberDocument-<?= $i ?>" name="numberDocument-<?= $i ?>" placeholder="Номер документа"
-                   class="formation__input text text_regular" required autocomplete="off">
+            <input type="type" id="numberDocument-<?= $i ?>" name="numberDocument-<?= $i ?>" placeholder="Номер документа"
+                   class="formation__input text text_regular" required autocomplete="off" disabled>
           </p>
         </div>
         <h2 class="formation__title text text_regular">Контактные данные</h2>
@@ -133,14 +109,14 @@ if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostD
 
           <p class="formation__container">
             <label for="emailUser-<?= $i ?>" class="formation__label text text_regular">E-mail</label>
-            <input type="email" id="emailUser-<?= $i ?>" name="emailUser-<?= $i ?>" placeholder="ivanov@mail.ru"
-                   class="formation__input text text_regular" required autocomplete="off">
+            <input type="email" id="emailUser-<?= $i ?>" name="emailUser-<?= $i ?>" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z]{0,}[.]{0,1}[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="ivanov@mail.ru" class="formation__input text text_regular" required autocomplete="off">
           </p>
 
           <p class="formation__container">
             <label for="phoneUser-<?= $i ?>" class="formation__label text text_regular">Телефон</label>
-            <input type="tel" id="phoneUser-<?= $i ?>" name="phoneUser-<?= $i ?>" placeholder="+7 999 999 99 99"
+            <input type="tel" id="phoneUser-<?= $i ?>" pattern=".{17}"  name="phoneUser-<?= $i ?>" placeholder="+7 999 999 99 99"
                    class="formation__input text text_regular" required autocomplete="off">
+								
           </p>
         </div>
         <input type="hidden" name="vedomost_id-<?=$i?>" value="<?=$arPostData['id']?>">
@@ -153,12 +129,14 @@ if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostD
         <div class="formation__wrapper formation__wrapper_submit">
 
         <p class="formation__container formation__container_checkbox">
-          <label for="agreement" class="formation__label formation__label_checkbox feedback-popup__label_checkbox text text_semibold">Согласие на обработку персональных
-            данных</label>
-          <input type="checkbox" id="agreement" name="emailUser" placeholder="ivanov@mail.ru"
-                 class="formation__input feedback-popup__input_checkbox text text_regular">
+
+      
+          <input type="checkbox" id="agreement" name="emailUserConfirm" placeholder="ivanov@mail.ru"
+                 class="formation__input feedback-popup__input_checkbox text text_regular agreement--input" required>
+					<label for="agreement" class="formation__label formation__label_checkbox feedback-popup__label_checkbox text text_semibold agreement--label">Согласие на обработку персональных
+									данных</label>
           <span class="formation__content formation__content_agreement feedback-popup__content text text_regular">
-            Я даю свое согласие ООО “ЕВРОТРАНС” на обработку
+            Я даю свое согласие ИП Яцунов С.П. на обработку
             моих персональных данных предоставленных мной при регистрации
             на сайте/оформлении на сайте www...ru, для их использования (в т.ч.
             передачу третьим лицам) всоответствии с Федеральным законом от
@@ -178,57 +156,11 @@ if (!(isset($arPostData['children']))||empty($arPostData['children']) ) $arPostD
         <p class="formation__container formation__container_button">
           <span class="formation__route text text_regular">Ставрополь - Москва</span>
           <span class="formation__price text text_regular"><?= $arPostData['fullprice']?> р.</span>
-          <button class="formation__button text text_regular button button_theme_red text text_regular" name="pay" value="1" id="payButtom" v-on:click.prevent="sendData">Оплатить билет</button>
+          <input type='submit' class="formation__button text text_regular button button_theme_red text text_regular" value='Оплатить билет' id="payButtom" >
         </p>
       </div>
     </form>
   </section>
 
 </main>
-<footer class="main-footer page__main-footer">
-  <section class="main-footer__top">
-    <h2 class="visually-hidden">Верхняя секция основного подвала страницы</h2><a href="/" class="logo main-footer__logo">
-      <img src="img/logo.png"></a>
-    <section class="additional-menu main-footer__company">
-      <h3 class="additional-menu__title text text_semibold">O компании</h3>
-      <ul class="additional-menu__list">
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">О нас</a></li>
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Договор оферты</a>
-        </li>
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Политика
-            конфиденциальности</a></li>
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Контакты</a></li>
-      </ul>
-    </section>
-    <section class="additional-menu main-footer__company">
-      <h3 class="additional-menu__title text text_semibold">Пользователям</h3>
-      <ul class="additional-menu__list">
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Вопросы и
-            ответы</a></li>
-        <li class="additional-menu__item"><a class="additional-menu__link text text_regular" href="">Купить билеты</a>
-        </li>
-      </ul>
-    </section>
-    <a class="contacts contacts_footer main-footer__contacts" href="tel:8800121212"><span
-        class="contacts__content text text_regular">Наш номер телефона</span><span
-        class="contacts__phone text text_semibold">8-800-123-12-12</span></a>
-  </section>
-  <section class="main-footer__copyright">
-    <h2 class="visually-hidden">Секция с копирайтами</h2>
-    <p class="main-footer__copy text text_regular">ИП Яцунов М.С.</p>
-  </section>
-</footer>
-
-<script src="js/flatpickr.min.js"></script>
-<script>
-  flatpickr('#birthday', {
-    enableTime: false,
-    dateFormat: 'd-m-Y',
-    time_24hr: true,
-    locale: 'ru'
-  })
-</script>
-<script src="js/formation/formation.js"></script>
-</body>
-
-</html>
+<?require_once $_SERVER['DOCUMENT_ROOT']."/views/formation/footer.php";?>

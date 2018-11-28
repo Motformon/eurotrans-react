@@ -1,5 +1,5 @@
 (function() {
-  "use strict";
+  "use strict"; 
 
 
 
@@ -36,7 +36,6 @@
     }
 
     function changeField(evt) {
-      console.log(evt.target.type);
       if (evt.target.type === "checkbox") {
         return;
       } else if (evt.target.value.length > 0) {
@@ -131,12 +130,14 @@
     target: 0
   };
 
+
   const citiesListMixin = {
     data() {
       return {
         cities: [],
         isShowList: false,
-        city: ""
+				city: "",
+				cityActiveNumber: 0
       };
     },
     methods: {
@@ -148,10 +149,93 @@
           .then(checkStatus)
           .then(toJSON)
           .then(data => {
-            this.cities = data.destination;
+						this.cities = data.destination;
           })
-          .catch(err => err);
-      },
+					.catch(err => err);
+					
+			},
+			choiceListItem(event) {
+
+				var numberUp = 38;
+				var numberDown = 40;
+				var numberEnter = 13;
+				var namesCityArr = event.target.nextElementSibling.children;
+				var firstCity = namesCityArr[0];
+				var lastCity = namesCityArr[namesCityArr.length-1];
+				var cityNow = namesCityArr[this.cityActiveNumber];
+
+
+				var styleActive = 'booking-form__option--active';
+
+				if (event.keyCode === numberEnter) {
+					this.isShowList = false;
+					firstCity.classList.remove(styleActive);
+				}
+
+				if (event.keyCode === numberDown) {
+					if(this.city === "") {
+						firstCity.classList.add(styleActive);
+						this.city = firstCity.textContent;
+						this.cityActiveNumber = 0;
+					} else {
+						cityNow.classList.remove(styleActive);
+
+						this.cityActiveNumber++;
+
+						if (namesCityArr.length === this.cityActiveNumber) {
+							this.cityActiveNumber = 0;
+						}
+						namesCityArr[this.cityActiveNumber].classList.add(styleActive);
+						this.city = namesCityArr[this.cityActiveNumber].textContent;
+					}
+				}
+
+				if (event.keyCode === numberUp) {
+					if(this.city === "") {
+						console.log(namesCityArr.length);
+						lastCity.classList.add(styleActive);
+						this.city = lastCity.textContent;
+						this.cityActiveNumber = namesCityArr.length - 1;
+					} else {
+						cityNow.classList.remove(styleActive);
+
+						this.cityActiveNumber--;
+
+						if (this.cityActiveNumber < 0) {
+							this.cityActiveNumber = namesCityArr.length - 1;
+						}
+						namesCityArr[this.cityActiveNumber].classList.add(styleActive);
+						this.city = namesCityArr[this.cityActiveNumber].textContent;
+					}
+				}
+
+
+
+			},
+			checkInputCity(target) {
+				var wordCity = this.city;
+
+				var namesCityObj = this.cities;
+				var namesCityArr = target.nextElementSibling.children;
+				
+				for (var i = 0; i < namesCityObj.length; i++) {
+					
+					var enteredLetter = String(namesCityObj[i].name.slice(0, wordCity.length).toLowerCase());
+
+					if (enteredLetter.includes(wordCity.toLowerCase())) {
+						namesCityArr[i].style.display = "block";
+
+						namesCityArr[i].innerHTML = `
+							<span style='color: #000000;'>${namesCityObj[i].name.slice(0, wordCity.length)}</span><span>${namesCityObj[i].name.slice(wordCity.length, namesCityObj[i].name.length)}</span>
+						`;
+
+
+          } else {
+						namesCityArr[i].style.display = "none";
+          }
+
+        }
+			},
       removeList(evt) {
         if (evt.target.classList.contains(`booking-form__input`)) {
           return;
@@ -176,6 +260,8 @@
     }
   };
 
+	
+
   if (document.querySelector(`#main-header__form`)) {
     const fromList = new Vue({
       el: "#cityFromHeader",
@@ -192,7 +278,7 @@
       data() {
         return {
           isShowList: false,
-          adult: 0,
+          adult: 1,
           children: 0,
           baby: 0
         };
@@ -218,7 +304,12 @@
         },
         showPassengerList() {
           this.isShowList = true;
-        },
+				},
+				submitShowList() {
+					console.log('1');
+					this.isShowList = true;
+					this.isShowList = false;
+				},
         removeList(evt) {
           if (evt.target.classList.contains(`booking-form__input`)) {
             return;
@@ -237,17 +328,18 @@
           }
 
           this.isShowList = false;
-        }
+				}
       },
       computed: {
         getPassenger() {
-          const passengerCount = this.adult + this.children + this.baby;
+					const passengerCount = this.adult + this.children + this.baby;
+					
           return `${passengerCount} ${getNumEnding(
             passengerCount,
             PASSENGERS
           )}`;
         }
-      }
+			}
     });
   }
 
@@ -270,7 +362,7 @@
       data() {
         return {
           isShowList: false,
-          adult: 0,
+          adult: 1,
           children: 0,
           baby: 0
         };
@@ -325,7 +417,7 @@
             PASSENGERS
           )}`;
         }
-      }
+			}
     });
   }
 
@@ -549,3 +641,75 @@ function scrollToTop(scrollDuration) {
 			else clearInterval(scrollInterval);
 		}, 15);
 }
+
+
+
+
+ymaps.ready(function () {
+
+	var myMap = new ymaps.Map('map', {
+		center: [45.055531, 41.998845],
+		controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'routeButtonControl'],
+		zoom: 16
+	}, {
+			searchControlProvider: 'yandex#search'
+		}),
+
+		// Создаём макет содержимого.
+		MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+			'<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+		),
+
+		myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+			hintContent: 'Ставрополь, проспект Карла Маркса, 1А',
+			balloonContent: 'Ставрополь, проспект Карла Маркса, 1А'
+		}, {
+				// Опции.
+				// Необходимо указать данный тип макета.
+				iconLayout: 'default#image',
+				// Своё изображение иконки метки.
+				iconImageHref: '../img/map-yandex.svg',
+				// Размеры метки.
+				iconImageSize: [32, 32],
+				// Смещение левого верхнего угла иконки относительно
+				// её "ножки" (точки привязки).
+				iconImageOffset: [-16, -32]
+			});
+
+    var myPolyline = new ymaps.Polyline([
+            // Указываем координаты вершин ломаной.
+            [45.055592, 41.998910],
+            [45.055668, 41.999138],
+            [45.055551, 41.999222],
+        ], {
+            // Описываем свойства геообъекта.
+            // Содержимое балуна.
+            balloonContent: ""
+        }, {
+            // Задаем опции геообъекта.
+            // Отключаем кнопку закрытия балуна.
+            balloonCloseButton: false,
+            // Цвет линии.
+            strokeColor: "#0d4292",
+            // Ширина линии.
+            strokeWidth: 5,
+            // Коэффициент прозрачности.
+            strokeOpacity: 1
+        });
+
+
+	myMap.geoObjects.add(myPlacemark).add(myPolyline);
+
+});
+
+
+var inputFormationPhone = document.querySelector(".popup-boss__form-inf--phone");
+
+var phoneMask = ["+", "7", " ", "(", /[1-9]/, /\d/, /\d/, ")", " ", /\d/, /\d/, /\d/, "-", /\d/, /\d/, /\d/, /\d/];
+
+var maskedInputPhone = vanillaTextMask.maskInput({
+	inputElement: inputFormationPhone,
+	mask: phoneMask
+});
+
+

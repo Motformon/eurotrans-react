@@ -52,6 +52,8 @@ curl_close($curl);
 
 $response = json_decode($response);
 $arTikets = $response;
-echo '<pre>';print_r($arTikets);echo '</pre>';
-
+if (empty($arTikets->routes))
+{
+    $message = "На данную дату билетов нет.";
+}
 
