@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Input from "../UI/Input/Input";
 import flatpickr from "flatpickr";
+import SityChoice from './SityChoice/SityChoice'
 
 flatpickr('#dateHeader', {
 	enableTime: false,
@@ -16,17 +16,6 @@ flatpickr('#dateHeader', {
 
 class SearchTicket extends Component {
 
-	state = {
-		listShowCity: false,
-	}
-
-	onFocusListShowHandler = () => {
-		this.setState({
-			listShowCity: true,
-		})
-	}
-
-	
 render() {
 
 	const destinationFrom = this.props.destinationFrom;
@@ -50,29 +39,23 @@ render() {
 			</li>
 	); 
 
+
 	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
 		<div className="booking-form__container" id="cityFromHeader">
-			<Input
-				onFocusListShowHandler = {this.onFocusListShowHandler}
-				label={'Откуда'}
-				classLabel={'booking-form__label text text_regular'}
-				placeholder={"Город отправления"}
-				classInput={"booking-form__input booking-form__input_select"}
+
+			<SityChoice
+				labelText = {'Откуда'}
+				labelHtmlFor = {'from'}
+				inputIdName = {'from'}
+				inputPlaceholder = {'Город отправления'}
+				destination = { destinationFrom }
 			/>
-
-
-			{ 
-				this.state.listShowCity 
-				 ? 	<ul className="booking-form__cities-list">
-							{ destinationFromList }
-						</ul>
-				 : null 
-			}
 	
 		</div>
 		<div className="booking-form__container" id="cityToHeader">
-			<Input
+			{/* <input	onFocusListShowHandler = {this.onFocusListShowHandler}
+				onBlurListHideHandler = {this.onBlurListHideHandler}
 				label={'Куда'}
 				classLabel={'booking-form__label text text_regular'}
 				placeholder={"Город прибытия"}
@@ -80,9 +63,15 @@ render() {
 			/>
 			<ul className="booking-form__cities-list">
 				
-			{ destinationToList }
+				{ 
+					this.state.listShowCity 
+					? 	<ul className="booking-form__cities-list">
+								{ destinationToList }
+							</ul>
+					: null 
+				}
 				
-			</ul>
+			</ul> */}
 		</div>
 		<div className="booking-form__container">
 				<label className="booking-form__label text text_regular" htmlFor="date">Когда</label>
