@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import SearchTicket from '../../components/SearchTicket/SearchTicket';
 import axios from 'axios';
 import RoutesMainPage from '../../components/RoutesMainPage/RoutesMainPage';
+import YandexMap from '../../components/YandexMap/YandexMap';
 // import classes from './MainPage.scss';
 
 class MainPage extends Component {
@@ -249,7 +250,8 @@ class MainPage extends Component {
 				</section>
 				<section class="address">
 					<div class="address__map">
-						<div id="map" class="address__item-map"></div>	
+						<YandexMap/>
+						{/* <div id="map" class="address__item-map"></div>	 */}
 					</div>
 				</section>
 				</main>
