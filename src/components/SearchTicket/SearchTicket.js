@@ -30,6 +30,28 @@ onClickChoiceSityFromHandler = event => {
 	})
 }
 
+onChangeSearchFromHandler = (event) => {
+	const value = event.target.value;
+	this.setState({
+		valueFrom: value,
+	})
+	const destinationFrom = this.props.destinationFrom;
+	
+	let newSityArr = [];
+
+	Object.keys(destinationFrom).forEach(elem => {
+		
+		let nameSity = destinationFrom[elem].name.toLowerCase();
+		let valueLowerCase =  value.toLowerCase();
+		console.log(nameSity, valueLowerCase);
+
+	});
+
+	
+
+}
+
+
 render() {
 
 
@@ -60,6 +82,7 @@ render() {
 				destination = { destinationFrom }
 				valueInput = {this.state.valueFrom}
 				onClickChoiceSityHandler = {this.onClickChoiceSityFromHandler}
+				onChangeSearchHandler = {this.onChangeSearchFromHandler}
 			/>
 	
 		</div>

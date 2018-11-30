@@ -55,6 +55,7 @@ const destinationList = this.props.destination.map((elem, index) =>
 				value = {this.props.valueInput}
 				onFocus={this.onFocusListShowHandler}
 				onBlur={this.onBlurListHideHandler}
+				onChange={this.props.onChangeSearchHandler}
 			/>
 
 			{ 
