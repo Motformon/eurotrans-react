@@ -11,10 +11,19 @@ class SityChoice extends Component {
 			listShowCity: true,
 		})
 	}
-	onBlurListHideHandler = () => {
+	// onBlurListHideHandler = () => {
+	// 	this.setState({
+	// 		listShowCity: false,
+	// 	})
+	// }
+
+	 onClickChoiceSityHandler = (event) => {
+	
+		this.props.onClickChoiceSityHandler(event);
+		
 		this.setState({
 			listShowCity: false,
-		})
+		});
 	}
 
 
@@ -26,12 +35,12 @@ const destinationList = this.props.destination.map((elem, index) =>
 <li 
 	key={ index.toString() } 
 	className="booking-form__option booking-form__option_cities text text_regular"
+	onClick = {this.onClickChoiceSityHandler}
 >
 	{elem.name}
 </li>
 ); 
 
-console.log(destinationList)
 
 	return (
 		<React.Fragment>
@@ -43,6 +52,7 @@ console.log(destinationList)
 				name={this.props.inputIdName} 
 				placeholder={this.props.inputPlaceholder} 
 				required
+				value = {this.props.valueInput}
 				onFocus={this.onFocusListShowHandler}
 				onBlur={this.onBlurListHideHandler}
 			/>

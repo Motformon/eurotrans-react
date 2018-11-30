@@ -16,19 +16,27 @@ flatpickr('#dateHeader', {
 
 class SearchTicket extends Component {
 
+state = {
+	valueFrom: '',
+	valueTo: '',
+}
+
+
+onClickChoiceSityFromHandler = event => {
+	const value = event.target.textContent;
+	console.log(value)
+	this.setState({
+		valueFrom: value,
+	})
+}
+
 render() {
+
+
 
 	const destinationFrom = this.props.destinationFrom;
 	const destinationTo = this.props.destinationTo;                       
 
-	const destinationFromList = destinationFrom.map((elem, index) => 
-			<li 
-				key={ index.toString() } 
-				className="booking-form__option booking-form__option_cities text text_regular"
-			>
-				{elem.name}
-			</li>
-	); 
 
 	const destinationToList = destinationTo.map((elem, index) => 
 			<li 
@@ -38,7 +46,7 @@ render() {
 				{elem.name}
 			</li>
 	); 
-
+ 
 
 	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
@@ -50,6 +58,8 @@ render() {
 				inputIdName = {'from'}
 				inputPlaceholder = {'Город отправления'}
 				destination = { destinationFrom }
+				valueInput = {this.state.valueFrom}
+				onClickChoiceSityHandler = {this.onClickChoiceSityFromHandler}
 			/>
 	
 		</div>
