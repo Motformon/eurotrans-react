@@ -1,74 +1,64 @@
+
+// import 'flatpickr/dist/themes/material_green.css'
+
 import React, {Component} from 'react';
-import flatpickr from "flatpickr";
+import Flatpickr from 'react-flatpickr';
+
+import Passenger from './Passengers/Passengers'
 import SityChoice from './SityChoice/SityChoice'
-
-flatpickr('#dateHeader', {
-	enableTime: false,
-	dateFormat: 'd-m-Y',
-	time_24hr: true,
-	locale: 'ru',
-	allowInput:true,
-	minDate: "today"
-});
-
-	
 
 
 class SearchTicket extends Component {
 
 state = {
+	passengerMale: 0,
+	passengerFemale: 0,
+	date: new Date(),
 	valueFrom: '',
 	valueTo: '',
 }
 
 
-onClickChoiceSityFromHandler = event => {
+onClickChoiceFromSityHandler = (event) => {
 	const value = event.target.textContent;
-	console.log(value)
 	this.setState({
 		valueFrom: value,
 	})
 }
 
-onChangeSearchFromHandler = (event) => {
-	const value = event.target.value;
+onClickChoiceToSityHandler = (event) => {
+	const value = event.target.textContent;
 	this.setState({
-		valueFrom: value,
+		valueTo: value,
 	})
-	const destinationFrom = this.props.destinationFrom;
-	
-	let newSityArr = [];
+}
 
-	Object.keys(destinationFrom).forEach(elem => {
+// onChangeSearchFromHandler = (event) => {
+// 	const value = event.target.value;
+// 	this.setState({
+// 		valueFrom: value,
+// 	})
+// 	const destinationFrom = this.props.destinationFrom;
+	
+// 	let newSityArr = [];
+
+// 	Object.keys(destinationFrom).forEach(elem => {
 		
-		let nameSity = destinationFrom[elem].name.toLowerCase();
-		let valueLowerCase =  value.toLowerCase();
-		console.log(nameSity, valueLowerCase);
+// 		let nameSity = destinationFrom[elem].name.toLowerCase();
+// 		let valueLowerCase =  value.toLowerCase();
+// 		console.log(nameSity, valueLowerCase);
 
-	});
+// 	});
 
-	
-
-}
+// }
 
 
 render() {
 
-
+	const { date } = this.state;
 
 	const destinationFrom = this.props.destinationFrom;
 	const destinationTo = this.props.destinationTo;                       
-
-
-	const destinationToList = destinationTo.map((elem, index) => 
-			<li 
-				key={ index.toString() } 
-				className="booking-form__option booking-form__option_cities text text_regular"
-			>
-				{elem.name}
-			</li>
-	); 
- 
 
 	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
@@ -81,61 +71,41 @@ render() {
 				inputPlaceholder = {'Город отправления'}
 				destination = { destinationFrom }
 				valueInput = {this.state.valueFrom}
-				onClickChoiceSityHandler = {this.onClickChoiceSityFromHandler}
+				onClickChoiceSityHandler = {this.onClickChoiceFromSityHandler}
 				onChangeSearchHandler = {this.onChangeSearchFromHandler}
 			/>
 	
 		</div>
 		<div className="booking-form__container" id="cityToHeader">
-			{/* <input	onFocusListShowHandler = {this.onFocusListShowHandler}
-				onBlurListHideHandler = {this.onBlurListHideHandler}
-				label={'Куда'}
-				classLabel={'booking-form__label text text_regular'}
-				placeholder={"Город прибытия"}
-				classInput={"booking-form__input booking-form__input_select"}
+
+		<SityChoice
+				labelText = {'Куда'}
+				labelHtmlFor = {'to'}
+				inputIdName = {'to'}
+				inputPlaceholder = {'Город прибытия'}
+				destination = { destinationTo }
+				valueInput = {this.state.valueTo}
+				onClickChoiceSityHandler = {this.onClickChoiceToSityHandler}
+				onChangeSearchHandler = {this.onChangeSearchToHandler}
 			/>
-			<ul className="booking-form__cities-list">
-				
-				{ 
-					this.state.listShowCity 
-					? 	<ul className="booking-form__cities-list">
-								{ destinationToList }
-							</ul>
-					: null 
-				}
-				
-			</ul> */}
 		</div>
 		<div className="booking-form__container">
 				<label className="booking-form__label text text_regular" htmlFor="date">Когда</label>
-				<input className="booking-form__input booking-form__input_calendar text text_regular" type="text" id="dateHeader" name="date" placeholder="дд.мм.гггг" autoComplete="off" required/>
+				<Flatpickr 
+					className='booking-form__input booking-form__input_calendar text text_regular'
+					placeholder="дд.мм.гггг"
+					options={{
+						enableTime: false,
+						dateFormat: 'd-m-Y',
+						time_24hr: true,
+						locale: 'ru',
+						allowInput:true,
+						minDate: "today" 
+					}}
+					onChange={date => { this.setState({date}) }}
+			 />
 		</div>
-		<div className="booking-form__container" id="passengerHeader">
-			<label className="booking-form__label text text_regular" htmlFor="passengers">Пассажиры</label>
-			<input className="booking-form__input booking-form__input_passengers text text_regular" type="text" id="passengers"  autoComplete="off" required/>
-			<ul className="booking-form__cities-list booking-form__cities-list_passenger">
-					<li className="booking-form__option booking-form__option_passengers text text_regular booking-form__option_passenger">
-							<p className="booking-form__passenger text text_regular">Взрослые
-								<span className="booking-form__container-passenger">
-									<button className="booking-form__count-passenger booking-form__count-passenger_minus">
-										<span className="visually-hidden">Минус</span>
-									</button>
-									<input className="booking-form__counter text text_regular"  id="adult" name="adult" required autoComplete="off" value="0"/>
-									<button className="booking-form__count-passenger booking-form__count-passenger_plus booking-form__count-passenger_active" >
-										<span className="visually-hidden">Плюс</span>
-										</button>
-								</span>
-							</p>
-					</li>
-					<li className="booking-form__option booking-form__option_passengers booking-form__option_passenger">
-							<p className="booking-form__passenger text text_regular">Дети<span className="booking-form__container-passenger">
-									<button className="booking-form__count-passenger booking-form__count-passenger_minus"><span className="visually-hidden">Минус</span></button>
-									<input className="booking-form__counter text text_regular"  name="children" required autoComplete="off" value="0"/>
-									<button className="booking-form__count-passenger booking-form__count-passenger_plus booking-form__count-passenger_active"><span className="visually-hidden">Плюс</span></button></span>
-							</p>
-					</li>
-			</ul>
-		</div>
+		<Passenger/>
 		<p className="booking-form__container">
 				<button className="booking-form__button button button_theme_red text text_regular">Найти билеты</button>
 		</p>
