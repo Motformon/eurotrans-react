@@ -248,10 +248,10 @@ class MainPage extends Component {
 							/>
 						</section>
 				</section>
-				<section class="address">
-					<div class="address__map">
+				<section className="address">
+					<div className="address__map">
 						<YandexMap/>
-						{/* <div id="map" class="address__item-map"></div>	 */}
+						{/* <div id="map" className="address__item-map"></div>	 */}
 					</div>
 				</section>
 				</main>
@@ -282,6 +282,31 @@ class MainPage extends Component {
 							<h2 className="visually-hidden">Секция с копирайтами</h2>
 					</section>
 				</footer>
+
+
+				<div className="popup-boss" >
+					<div className="popup-boss__mask"></div>
+					<div className="popup-boss__window">
+						<div className="popup-boss__close"></div>
+						<form id="order-popup-boss" className="popup-boss__form-order" method="POST" onsubmit='return false;'>
+							<input class='popup-boss__form-inf' type="text" name="name" placeholder="Ваше имя" required/>
+							<input class='popup-boss__form-inf popup-boss__form-inf--phone' type="text" name="phone" placeholder="Ваш телефон" required/>
+							<input class='popup-boss__form-inf' type="email" name="email" placeholder="Ваш email" required/>>
+							<textarea name="text" class='popup-boss__form-inf popup-boss__form-inf--textarea' placeholder='Текст обращения'></textarea>
+							<input class='popup-boss__button' type="submit" value="Отправить" onclick='sendCalcMail();'/>
+						</form>
+					</div>
+				</div>
+
+				<div className="popup-thank">
+					<div className="popup-thank__mask"></div>
+					<div className="popup-thank__window">
+						<div className="popup-thank__close"></div>
+						<img src="/img/gen-dir.jpg" alt="EuroTrans" className="popup-thank__img"/>
+						<p className="popup-thank__text">Спасибо, что помогаете нам стать лучше. Я лично рассмотрю ваше обращение и отвечу вам на него в течение трех дней.</p>
+					</div>
+				</div>
+
 			</div>
 		);
 	}

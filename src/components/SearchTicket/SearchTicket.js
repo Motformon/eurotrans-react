@@ -11,13 +11,55 @@ import SityChoice from './SityChoice/SityChoice'
 class SearchTicket extends Component {
 
 state = {
-	passengerMale: 0,
-	passengerFemale: 0,
+	passengerAdult: 1,
+	passengerChild: 0,
 	date: new Date(),
 	valueFrom: '',
 	valueTo: '',
 }
 
+onClickMinusAdultHandler = (event) => {
+	event.preventDefault();
+	let passengerResult = this.state.passengerAdult - 1;
+
+	if(passengerResult < 0) {
+		passengerResult = 0;
+	}
+
+	this.setState({
+		passengerAdult: passengerResult,
+	})
+}
+
+onClickPlusAdultHandler = (event) => {
+	event.preventDefault();
+	let passengerResult = this.state.passengerAdult + 1;
+	
+	this.setState({
+		passengerAdult: passengerResult,
+	})
+}
+onClickMinusChildHandler = (event) => {
+	event.preventDefault();
+	let passengerResult = this.state.passengerChild - 1;
+
+	if(passengerResult < 0) {
+		passengerResult = 0;
+	}
+
+	this.setState({
+		passengerChild: passengerResult,
+	})
+}
+
+onClickPlusChildHandler = (event) => {
+	event.preventDefault();
+	let passengerResult = this.state.passengerChild + 1;
+	
+	this.setState({
+		passengerChild: passengerResult,
+	})
+}
 
 onClickChoiceFromSityHandler = (event) => {
 	const value = event.target.textContent;
@@ -34,29 +76,20 @@ onClickChoiceToSityHandler = (event) => {
 }
 
 
-
-
-
 onChangeSearchFromHandler = (event) => {
 	const value = event.target.value;
-
-	console.log(value)
 
 	this.setState({
 		valueFrom: value,
 	})
-	// const destinationFrom = this.props.destinationFrom;
-	
-	// let newSityArr = [];
+}
 
-	// Object.keys(destinationFrom).forEach(elem => {
-		
-	// 	let nameSity = destinationFrom[elem].name.toLowerCase();
-	// 	let valueLowerCase =  value.toLowerCase();
-	// 	console.log(nameSity, valueLowerCase);
+onChangeSearchToHandler = (event) => {
+	const value = event.target.value;
 
-	// });
-
+	this.setState({
+		valueTo: value,
+	})
 }
 
 
@@ -103,7 +136,7 @@ render() {
 				labelHtmlFor = {'to'}
 				inputIdName = {'to'}
 				inputPlaceholder = {'Город прибытия'}
-				destination = { destinationTo }
+				destination = { filterCity(destinationTo,this.state.valueTo, 20) }
 				valueInput = {this.state.valueTo}
 				onClickChoiceSityHandler = {this.onClickChoiceToSityHandler}
 				onChangeSearchHandler = {this.onChangeSearchToHandler}
@@ -112,6 +145,7 @@ render() {
 		<div className="booking-form__container">
 				<label className="booking-form__label text text_regular" htmlFor="date">Когда</label>
 				<Flatpickr 
+					required
 					className='booking-form__input booking-form__input_calendar text text_regular'
 					placeholder="дд.мм.гггг"
 					options={{
@@ -125,7 +159,14 @@ render() {
 					onChange={date => { this.setState({date}) }}
 			 />
 		</div>
-		<Passenger/>
+		<Passenger
+			passengerAdult = {this.state.passengerAdult}
+			passengerChild = {this.state.passengerChild}
+			onClickMinusAdultHandler = {this.onClickMinusAdultHandler}
+			onClickPlusAdultHandler = {this.onClickPlusAdultHandler}
+			onClickMinusChildHandler = {this.onClickMinusChildHandler}
+			onClickPlusChildHandler = {this.onClickPlusChildHandler}
+		/>
 		<p className="booking-form__container">
 				<button className="booking-form__button button button_theme_red text text_regular">Найти билеты</button>
 		</p>

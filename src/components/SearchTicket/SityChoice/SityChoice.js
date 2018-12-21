@@ -4,6 +4,7 @@ class SityChoice extends Component {
 
 	state = {
 		listShowCity: false,
+		listShowCityHover: false,
 	}
 
 	onFocusListShowHandler = () => {
@@ -12,11 +13,9 @@ class SityChoice extends Component {
 		})
 	}
 	onBlurListHideHandler = () => {
-		setTimeout(() => {
 			this.setState({
 				listShowCity: false,
 			})
-		}, 100);
 	}
 
 	 onClickChoiceSityHandler = (event) => {
@@ -25,10 +24,21 @@ class SityChoice extends Component {
 		
 		this.setState({
 			listShowCity: false,
+			listShowCityHover: false, 
 		});
 	}
 
+	onMouseEnterListHandler = () => {
+		this.setState({
+			listShowCityHover: true,
+		});
+	}
 
+	onMouseLeaveListHandler = () => {
+		this.setState({
+			listShowCityHover: false,
+		});
+	}
 render() {
 
 
@@ -37,7 +47,7 @@ const destinationList = this.props.destination.map((elem, index) =>
 <li 
 	key={ index.toString() } 
 	className="booking-form__option booking-form__option_cities text text_regular"
-	onMouseDown = {this.onClickChoiceSityHandler}
+	onClick = {this.onClickChoiceSityHandler}
 >
 	{elem.name}
 </li>
@@ -61,9 +71,13 @@ const destinationList = this.props.destination.map((elem, index) =>
 				onChange={this.props.onChangeSearchHandler}
 			/>
 
-			{ 
-				this.state.listShowCity 
-				? 	<ul className="booking-form__cities-list">
+			{  
+				this.state.listShowCityHover || this.state.listShowCity  
+				? 	<ul 
+							className="booking-form__cities-list"
+							onMouseEnter={this.onMouseEnterListHandler}
+							onMouseLeave={this.onMouseLeaveListHandler}
+						>
 							{ destinationList }
 						</ul>
 				: null 
