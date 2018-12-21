@@ -33,24 +33,31 @@ onClickChoiceToSityHandler = (event) => {
 	})
 }
 
-// onChangeSearchFromHandler = (event) => {
-// 	const value = event.target.value;
-// 	this.setState({
-// 		valueFrom: value,
-// 	})
-// 	const destinationFrom = this.props.destinationFrom;
+
+
+
+
+onChangeSearchFromHandler = (event) => {
+	const value = event.target.value;
+
+	console.log(value)
+
+	this.setState({
+		valueFrom: value,
+	})
+	// const destinationFrom = this.props.destinationFrom;
 	
-// 	let newSityArr = [];
+	// let newSityArr = [];
 
-// 	Object.keys(destinationFrom).forEach(elem => {
+	// Object.keys(destinationFrom).forEach(elem => {
 		
-// 		let nameSity = destinationFrom[elem].name.toLowerCase();
-// 		let valueLowerCase =  value.toLowerCase();
-// 		console.log(nameSity, valueLowerCase);
+	// 	let nameSity = destinationFrom[elem].name.toLowerCase();
+	// 	let valueLowerCase =  value.toLowerCase();
+	// 	console.log(nameSity, valueLowerCase);
 
-// 	});
+	// });
 
-// }
+}
 
 
 render() {
@@ -59,6 +66,19 @@ render() {
 
 	const destinationFrom = this.props.destinationFrom;
 	const destinationTo = this.props.destinationTo;                       
+
+
+	function filterCity(destination ,searchText, maxResults) {
+		console.log(destination);
+		return destination
+			.filter(city => {
+				if (city.name.toLowerCase().includes(searchText.toLowerCase())) {
+					return true;
+				}
+				return false;
+			})
+			.slice(0, maxResults);
+	}
 
 	return (
 	<form className="booking-form main-header__form" action="/projects/eurotrans-react/booking.php" id="main-header__form">
@@ -69,7 +89,7 @@ render() {
 				labelHtmlFor = {'from'}
 				inputIdName = {'from'}
 				inputPlaceholder = {'Город отправления'}
-				destination = { destinationFrom }
+				destination = { filterCity(destinationFrom,this.state.valueFrom, 20) }
 				valueInput = {this.state.valueFrom}
 				onClickChoiceSityHandler = {this.onClickChoiceFromSityHandler}
 				onChangeSearchHandler = {this.onChangeSearchFromHandler}

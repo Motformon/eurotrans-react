@@ -43,7 +43,7 @@ const destinationList = this.props.destination.map((elem, index) =>
 </li>
 ); 
 
-console.log(destinationList)
+// console.log(destinationList)
 
 	return (
 		<React.Fragment>
