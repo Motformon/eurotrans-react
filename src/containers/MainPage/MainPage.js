@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import SearchTicket from '../../components/SearchTicket/SearchTicket';
 import axios from 'axios';
+import {connect} from 'react-redux'
 import RoutesMainPage from '../../components/RoutesMainPage/RoutesMainPage';
 import YandexMap from '../../components/YandexMap/YandexMap';
+import Boss from '../../components/Popups/Boss/Boss';
+import Thanks from '../../components/Popups/Thanks/Thanks';
 // import classes from './MainPage.scss';
 
 class MainPage extends Component {
@@ -34,6 +37,7 @@ class MainPage extends Component {
 
 
 	render() {
+		console.log(this.props)
 		return (
 			<div>
 				<header className="main-header">
@@ -110,7 +114,12 @@ class MainPage extends Component {
 											
 										</p>
 								</div>
-								<a className="button button_theme_red text text_regular feedback__link--write">Написать руководителю</a>
+								<a 
+									onClick={this.props.onBoss}
+									className="button button_theme_red text text_regular feedback__link--write"
+								>
+									Написать руководителю
+								</a>
 								<input type="hidden" className='feedback__link '/>
             </div>
         </section>
@@ -284,32 +293,36 @@ class MainPage extends Component {
 				</footer>
 
 
-				<div className="popup-boss" >
-					<div className="popup-boss__mask"></div>
-					<div className="popup-boss__window">
-						<div className="popup-boss__close"></div>
-						<form id="order-popup-boss" className="popup-boss__form-order" method="POST" onsubmit='return false;'>
-							<input class='popup-boss__form-inf' type="text" name="name" placeholder="Ваше имя" required/>
-							<input class='popup-boss__form-inf popup-boss__form-inf--phone' type="text" name="phone" placeholder="Ваш телефон" required/>
-							<input class='popup-boss__form-inf' type="email" name="email" placeholder="Ваш email" required/>>
-							<textarea name="text" class='popup-boss__form-inf popup-boss__form-inf--textarea' placeholder='Текст обращения'></textarea>
-							<input class='popup-boss__button' type="submit" value="Отправить" onclick='sendCalcMail();'/>
-						</form>
-					</div>
-				</div>
 
-				<div className="popup-thank">
-					<div className="popup-thank__mask"></div>
-					<div className="popup-thank__window">
-						<div className="popup-thank__close"></div>
-						<img src="/img/gen-dir.jpg" alt="EuroTrans" className="popup-thank__img"/>
-						<p className="popup-thank__text">Спасибо, что помогаете нам стать лучше. Я лично рассмотрю ваше обращение и отвечу вам на него в течение трех дней.</p>
-					</div>
-				</div>
+				{  
+					this.props.popups.boss 
+				  ? <Boss/>
+					: null 
+				}
+				{  
+					this.props.popups.thanks 
+				  ? <Thanks/>
+					: null 
+				}
+
+
 
 			</div>
 		);
 	}
 }
 
-export default MainPage;
+ 
+function mapStateToProps(state) {
+	return {
+		popups: state.popups
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		onBoss: () => dispatch({type: 'BOSS'})
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

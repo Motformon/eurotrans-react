@@ -3265,7 +3265,7 @@ margin-top: 10px;
 
 	.popup-boss {
   z-index: 100;
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -3413,7 +3413,7 @@ margin-top: 10px;
 
 	.popup-thank {
   z-index: 100;
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;

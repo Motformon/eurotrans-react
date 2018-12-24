@@ -4,20 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-// import {createStore, compose, applyMiddleware} from "redux";
-// import {Provider} from "react-redux";
-// import rootReducer from './store/reducers/rootReducers'
+import {createStore, compose, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import rootReducer from './store/reducers/rootReducers'
 
-// const store = createStore(
-//   rootReducer
-// )
+const store = createStore(
+  rootReducer
+)
 
 const app = (
-		// <Provider store={store}>
+		<Provider store={store}>
 			<BrowserRouter>
 				<App />
 			</BrowserRouter>
-		// </Provider>
+		</Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));
