@@ -291,21 +291,11 @@ class MainPage extends Component {
 							<h2 className="visually-hidden">Секция с копирайтами</h2>
 					</section>
 				</footer>
-
-
-
 				{  
-					this.props.popups.boss 
+					this.props.mainPage.popups.boss 
 				  ? <Boss/>
 					: null 
-				}
-				{  
-					this.props.popups.thanks 
-				  ? <Thanks/>
-					: null 
-				}
-
-
+				} 
 
 			</div>
 		);
@@ -315,13 +305,13 @@ class MainPage extends Component {
  
 function mapStateToProps(state) {
 	return {
-		popups: state.popups
+		mainPage: state.mainPage
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onBoss: () => dispatch({type: 'BOSS'})
+		onBoss: () => dispatch({type: 'BOSS_SHOW'})
 	}
 }
 
