@@ -37,7 +37,6 @@ class MainPage extends Component {
 
 
 	render() {
-		console.log(this.props)
 		return (
 			<div>
 				<header className="main-header">

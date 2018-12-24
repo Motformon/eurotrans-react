@@ -61,7 +61,7 @@ const destinationList = this.props.destination.map((elem, index) =>
 			<input 
 				className="booking-form__input booking-form__input_select" 
 				id={this.props.inputIdName} 
-				autocomplete="off" 
+				autoComplete="off" 
 				name={this.props.inputIdName} 
 				placeholder={this.props.inputPlaceholder} 
 				required
