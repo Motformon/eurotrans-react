@@ -36,7 +36,7 @@ class Booking extends Component {
 							<img className="logo__image" src="img/header-logo.png" alt='evrotrans'/>
 						</a>
 					</div>
-					<div className="main-header__booking-form"> 
+					<div className="promo main-header__promo main-header__promo--booking" > 
 						<h1 className="main-header__title text text_regular">{/* <?= $fromCity ?> — <?= $toCity ?> */}</h1>
 						<SearchTicket
 							destinationFrom = {this.state.destinationFrom}
@@ -147,7 +147,7 @@ class Booking extends Component {
 					<section className="main-footer__copyright">
 							<p className="main-footer__copy text text_regular">ИП Яцунов С.П.</p><a className="main-footer__copy-link text text_regular" href="#"></a>
 							<a href="https://webcosmos.ru/" className="main-footer__webcosmos-link">
-								<img src="/img/logo-webcosmos.png" alt='evrotrans' className="main-footer__webcosmos-img"/>
+								<img src="img/logo-webcosmos.png" alt='evrotrans' className="main-footer__webcosmos-img"/>
 							</a>
 					</section>
 			</footer>

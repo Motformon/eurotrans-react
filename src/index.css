@@ -3799,3 +3799,12 @@ margin-top: 10px;
 		}
 	}
 
+
+
+	.main-header__promo--booking {
+		margin-top: 0;
+	
+	}
+	.main-header__promo--booking label {
+		color: #000;
+	}

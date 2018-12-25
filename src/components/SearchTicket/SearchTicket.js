@@ -4,17 +4,18 @@
 import React, {Component} from 'react';
 import Flatpickr from 'react-flatpickr';
 import { Russian } from "flatpickr/dist/l10n/ru.js"
-
+import {NavLink} from 'react-router-dom'
 import Passenger from './Passengers/Passengers'
-import SityChoice from './SityChoice/SityChoice'
-
+import SityChoice from './SityChoice/SityChoice';
+import {connect} from 'react-redux'
+import { dataWay } from '../../store/actions/actions';
 
 class SearchTicket extends Component {
 
 state = {
 	passengerAdult: 1,
 	passengerChild: 0,
-	date: new Date(),
+	date: '',
 	valueFrom: '',
 	valueTo: '',
 }
@@ -23,8 +24,8 @@ onClickMinusAdultHandler = (event) => {
 	event.preventDefault();
 	let passengerResult = this.state.passengerAdult - 1;
 
-	if(passengerResult < 0) {
-		passengerResult = 0;
+	if(passengerResult < 1) {
+		passengerResult = 1;
 	}
 
 	this.setState({
@@ -95,6 +96,8 @@ onChangeSearchToHandler = (event) => {
 
 
 render() {
+	console.log(this.props)
+	
 
 	const { date } = this.state;
 
@@ -168,12 +171,44 @@ render() {
 			onClickPlusChildHandler = {this.onClickPlusChildHandler}
 		/>
 		<p className="booking-form__container">
-				<button className="booking-form__button button button_theme_red text text_regular">Найти билеты</button>
+
+			{	this.state.valueFrom !== '' && this.state.valueTo !== '' && this.state.date !== ''
+			? <NavLink
+					to="/booking"
+					className="booking-form__button button button_theme_red text text_regular"
+					onClick = {this.props.onDataWay}
+				>
+					Найти билеты
+				</NavLink>
+			: <button 
+					className="booking-form__button button button_theme_red text text_regular"					
+				>
+				Найти билеты</button>
+			}
+		
+
+
+
+
 		</p>
 	</form>
 	)}
 };
 
-export default SearchTicket;
+ 
+function mapStateToProps(state) {
+	return {
+		booking: state.booking,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		onDataWay: () => dispatch(dataWay())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchTicket);
+
 
 
