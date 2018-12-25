@@ -71,7 +71,7 @@ render() {
 
 	const allPassangers = this.props.passengerAdult + this.props.passengerChild;
 
-
+	const resultPassangersString = `${allPassangers} ${getNumEnding(allPassangers,PASSENGERS)}`;
 
 	return (
 		<div className="booking-form__container" id="passengerHeader">
@@ -80,10 +80,11 @@ render() {
 			 className="booking-form__input booking-form__input_passengers text text_regular" 
 			 type="text" 
 			 id="passengers"  
-			 value={`${allPassangers} ${getNumEnding(allPassangers,PASSENGERS)}`}
-			 required
 			 onFocus={this.onFocusListShowHandler}
 			 onBlur={this.onBlurListHideHandler}
+			 readOnly
+			 value={resultPassangersString}
+			 
 			/>
 			
 			{ 

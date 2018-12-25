@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import SearchTicket from '../../components/SearchTicket/SearchTicket';
-import classes from './Booking.scss';
 import axios from 'axios';
 class Booking extends Component {
 
@@ -34,7 +33,7 @@ class Booking extends Component {
 				<header className="main-header main-header_booking">
 					<div className="main-header__top">
 						<a className="logo main-header__logo" href="/">
-							<img className="logo__image" src="img/header-logo.png"/>
+							<img className="logo__image" src="img/header-logo.png" alt='evrotrans'/>
 						</a>
 					</div>
 					<div className="main-header__booking-form"> 
@@ -125,7 +124,7 @@ class Booking extends Component {
 					<section className="main-footer__top">
 							<h2 className="visually-hidden">Верхняя секция основного подвала страницы</h2>
 							<a className="logo main-footer__logo" href="/">
-								<img className="logo__image" src="/img/header-logo.png"/>
+								<img className="logo__image" src="/img/header-logo.png" alt='evrotrans'/>
 							</a>
 							<section className="additional-menu main-footer__company">
 									<h3 className="additional-menu__title text text_semibold">O компании</h3>
@@ -148,7 +147,7 @@ class Booking extends Component {
 					<section className="main-footer__copyright">
 							<p className="main-footer__copy text text_regular">ИП Яцунов С.П.</p><a className="main-footer__copy-link text text_regular" href="#"></a>
 							<a href="https://webcosmos.ru/" className="main-footer__webcosmos-link">
-								<img src="/img/logo-webcosmos.png" alt="" className="main-footer__webcosmos-img"/>
+								<img src="/img/logo-webcosmos.png" alt='evrotrans' className="main-footer__webcosmos-img"/>
 							</a>
 					</section>
 			</footer>

@@ -1507,11 +1507,13 @@ span.flatpickr-weekday {
 }
 
 .route__sending {
+	opacity: 0;
   margin: 0 0 8px;
   font-size: 16px;
 }
 
 .route__list {
+	opacity: 0;
   width: 100%;
   list-style: none;
   padding-left: 0;

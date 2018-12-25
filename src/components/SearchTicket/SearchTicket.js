@@ -3,6 +3,7 @@
 
 import React, {Component} from 'react';
 import Flatpickr from 'react-flatpickr';
+import { Russian } from "flatpickr/dist/l10n/ru.js"
 
 import Passenger from './Passengers/Passengers'
 import SityChoice from './SityChoice/SityChoice'
@@ -102,7 +103,6 @@ render() {
 
 
 	function filterCity(destination ,searchText, maxResults) {
-		console.log(destination);
 		return destination
 			.filter(city => {
 				if (city.name.toLowerCase().includes(searchText.toLowerCase())) {
@@ -152,7 +152,7 @@ render() {
 						enableTime: false,
 						dateFormat: 'd-m-Y',
 						time_24hr: true,
-						locale: 'ru',
+						locale: Russian,
 						allowInput:true,
 						minDate: "today" 
 					}}

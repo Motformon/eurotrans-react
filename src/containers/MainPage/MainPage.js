@@ -6,7 +6,7 @@ import RoutesMainPage from '../../components/RoutesMainPage/RoutesMainPage';
 import YandexMap from '../../components/YandexMap/YandexMap';
 import Boss from '../../components/Popups/Boss/Boss';
 import Thanks from '../../components/Popups/Thanks/Thanks';
-// import classes from './MainPage.scss';
+import { bossShow } from '../../store/actions/actions';
 
 class MainPage extends Component {
 
@@ -42,7 +42,7 @@ class MainPage extends Component {
 				<header className="main-header">
 					<div className="main-header__top">
 						<a className="logo main-header__logo" href="/">
-							<img className="logo__image" alt=""  src="img/header-logo.png" />
+							<img className="logo__image" alt='evrotrans'  src="img/header-logo.png" />
 						</a>
 						<a className="contacts main-header__contacts" href="tel:8800121212">
 							<span className="contacts__content text text_regular contacts__content_header">Звонок по России бесплатный</span>
@@ -106,7 +106,7 @@ class MainPage extends Component {
             <div className="feedback__wrapper">
                 <div className="feedback__container">
 										<h1 className="feedback__title text text_semibold">Контолируем качество перевозок</h1>
-										<img src="img/gen-dir.jpg" className='feedback__img-dir' alt=""/>
+										<img src="img/gen-dir.jpg" className='feedback__img-dir' alt='evrotrans'/>
                     <p className="feedback__content text text_regular">
 												Максим Яцунов, заместитель генерального директора.
 												<span className='feedback__content--quote'> Помогите нам стать лучше. Если у вас есть пожелания, рекомендации или претензии относительно оказанных услуг, пожалуйста, направьте их лично мне</span>
@@ -132,46 +132,46 @@ class MainPage extends Component {
 										<div className="swiper-slide">
 											<div className="buses__item">
 												<picture className="buses__picture">
-														<source type="image/webp" srcset="img/mercedes-mobile.webp"/>
+														<source type="image/webp" srcSet="img/mercedes-mobile.webp"/>
 														<img className="buses__image" src="img/mercedes-mobile.jpg" alt="Mercedes Sprinter"/>
 												</picture>
 												<div className="buses__container">
-														<p className="buses__model text text_semibold">Mercedes Sprinter
+														<div className="buses__model text text_semibold">Mercedes Sprinter
 																<ul className="buses__features-list">
 																		<li className="buses__features-item text text_regular">Комфортные сидения</li>
 																		<li className="buses__features-item text text_regular"> Откидывающиеся сидения</li>
 																		<li className="buses__features-item text text_regular">Индивидуальный кондиционер</li>
 																</ul>
-														</p>
+														</div>
 												</div>
 											</div>
 										</div>
 										<div className="swiper-slide">
 									    <div className="buses__item">
 												<picture className="buses__picture">
-														<source type="image/webp" srcset="img/hyundai-mobile.webp"/>
+														<source type="image/webp" srcSet="img/hyundai-mobile.webp"/>
 														<img className="buses__image" src="img/hyundai-mobile.jpg" alt="Hyundai"/>
 												</picture>
 												<div className="buses__container">
-														<p className="buses__model text text_semibold">Hyundai
+														<div className="buses__model text text_semibold">Hyundai
 																<ul className="buses__features-list">
 																		<li className="buses__features-item text text_regular">Комфортные сидения</li>
 																		<li className="buses__features-item text text_regular"> Откидывающиеся сидения</li>
 																		<li className="buses__features-item text text_regular">Индивидуальный кондиционер</li>
 																		<li className="buses__features-item text text_regular">Микрофон для громкой связи с пассажирами</li>
 																</ul>
-														</p>
+														</div>
 												</div>
 											</div>
 										</div>
 										<div className="swiper-slide">
 											<div className="buses__item">
 												<picture className="buses__picture">
-														<source type="image/webp" srcset="img/1-stage-mobile.webp"/>
+														<source type="image/webp" srcSet="img/1-stage-mobile.webp"/>
 														<img className="buses__image" src="img/1-stage-mobile.jpg" alt="1,5 этажные автобусы"/>
 												</picture>
 												<div className="buses__container">
-														<p className="buses__model text text_semibold">1,5 этажные автобусы
+														<div className="buses__model text text_semibold">1,5 этажные автобусы
 																<ul className="buses__features-list">
 																		<li className="buses__features-item text text_regular">Комфортные сидения</li>
 																		<li className="buses__features-item text text_regular"> Откидывающиеся сидения</li>
@@ -180,18 +180,18 @@ class MainPage extends Component {
 																		<li className="buses__features-item text text_regular">Туалет</li>
 																		<li className="buses__features-item text text_regular">Мини-кухня</li>
 																</ul>
-														</p>
+														</div>
 												</div>
 											</div>
 										</div>
 										<div className="swiper-slide">
 											<div className="buses__item">
 												<picture className="buses__picture">
-														<source type="image/webp" srcset="img/2-stage-mobile.webp"/>
+														<source type="image/webp" srcSet="img/2-stage-mobile.webp"/>
 														<img className="buses__image" src="img/2-stage-mobile.jpg" alt="2 этажные автобусы"/>
 												</picture>
 												<div className="buses__container">
-														<p className="buses__model text text_semibold">2 этажные автобусы
+														<div className="buses__model text text_semibold">2 этажные автобусы
 																<ul className="buses__features-list">
 																		<li className="buses__features-item text text_regular">Комфортные сидения</li>
 																		<li className="buses__features-item text text_regular"> Откидывающиеся сидения</li>
@@ -200,7 +200,7 @@ class MainPage extends Component {
 																		<li className="buses__features-item text text_regular">Туалет</li>
 																		<li className="buses__features-item text text_regular">Мини-кухня</li>
 																</ul>
-														</p>
+														</div>
 												</div>
 											</div>
 										</div>
@@ -267,7 +267,7 @@ class MainPage extends Component {
 					<section className="main-footer__top">
 							<h2 className="visually-hidden">Верхняя секция основного подвала страницы</h2>
 							<a className="logo main-footer__logo" href="/">
-								<img className="logo__image" src="img/logo.png"/>
+								<img className="logo__image" alt='evrotrans' src="img/logo.png"/>
 							</a>
 							<section className="additional-menu main-footer__company">
 									<h3 className="additional-menu__title text text_semibold">O компании</h3>
@@ -310,7 +310,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onBoss: () => dispatch({type: 'BOSS_SHOW'})
+		onBoss: () => dispatch(bossShow())
 	}
 }
 
