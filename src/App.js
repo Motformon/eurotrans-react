@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MainPage from './containers/MainPage/MainPage';
 import Booking from './containers/Booking/Booking';
+import Contact from './containers/Contact/Contact';
+import Formation from './containers/Formation/Formation';
 import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
 
@@ -13,8 +15,10 @@ class App extends Component {
 
     return (
 			<Switch>
-				<Route path="/booking" component={Booking} />
 				<Route path="/" exact component={MainPage} />
+				<Route path="/booking" component={Booking} />
+				<Route path="/contacts" exact component={Contact} />
+				<Route path="/formation" exact component={Formation} />
 				<Redirect to="/" />
 			</Switch>
     );

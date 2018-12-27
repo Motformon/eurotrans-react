@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class Formation extends Component {
+class Contact extends Component {
 	render() {
 		return (
 			<div>
-				123
+				1234
 			</div>
 		);
 	}
 }
 
-export default Formation;
+export default Contact;
