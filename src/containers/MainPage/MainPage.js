@@ -8,7 +8,7 @@ import Boss from '../../components/Popups/Boss/Boss';
 import Thanks from '../../components/Popups/Thanks/Thanks';
 import Footer from '../Footer/Footer'
 import { bossShow } from '../../store/actions/actions';
-
+import {NavLink} from 'react-router-dom';
 class MainPage extends Component {
 
 	state = {
@@ -42,9 +42,9 @@ class MainPage extends Component {
 			<div>
 				<header className="main-header">
 					<div className="main-header__top">
-						<a className="logo main-header__logo" href="/">
+						<NavLink className="logo main-header__logo" to="/">
 							<img className="logo__image" alt='evrotrans'  src="img/header-logo.png" />
-						</a>
+						</NavLink>
 						<a className="contacts main-header__contacts" href="tel:8800121212">
 							<span className="contacts__content text text_regular contacts__content_header">Звонок по России бесплатный</span>
 							<span className="contacts__phone text text_semibold contacts__content_header">8-800-123-12-12</span>

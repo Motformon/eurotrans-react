@@ -5,19 +5,13 @@ import Contact from './containers/Contact/Contact';
 import Formation from './containers/Formation/Formation';
 import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
-
 class App extends Component {
   render() {
-
-		// let routes = (
-
-		// )
-
     return (
 			<Switch>
 				<Route path="/" exact component={MainPage} />
-				<Route path="/booking" component={Booking} />
-				<Route path="/contacts" exact component={Contact} />
+				<Route path="/booking" exact component={Booking} />
+				<Route path="/contacts" exact component={Contact}	/>
 				<Route path="/formation" exact component={Formation} />
 				<Redirect to="/" />
 			</Switch>

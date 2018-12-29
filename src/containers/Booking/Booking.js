@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SearchTicket from '../../components/SearchTicket/SearchTicket';
 import axios from 'axios';
+import {NavLink} from 'react-router-dom';
 class Booking extends Component {
 
 	state = {
@@ -32,9 +33,9 @@ class Booking extends Component {
 			<div>
 				<header className="main-header main-header_booking">
 					<div className="main-header__top">
-						<a className="logo main-header__logo" href="/">
+						<NavLink className="logo main-header__logo" to="/">
 							<img className="logo__image" src="img/header-logo.png" alt='evrotrans'/>
-						</a>
+						</NavLink>
 					</div>
 					<div className="promo main-header__promo main-header__promo--booking" > 
 						<h1 className="main-header__title text text_regular">{/* <?= $fromCity ?> — <?= $toCity ?> */}</h1>
