@@ -1,5 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import OfferPdf from '../../assets/upload/offer.pdf';
+import PolicyPdf from '../../assets/upload/privacy-policy.pdf';
+import RequisitesPdf from '../../assets/upload/requisites.pdf';
 
 const Footer = props => (
 	<div>
@@ -13,10 +16,10 @@ const Footer = props => (
 							<h3 className="additional-menu__title text text_semibold">O компании</h3>
 							<ul className="additional-menu__list">
 									<li className="additional-menu__item">
-									<a className="additional-menu__link text text_regular" href="">Договор оферты</a>
+									<a className="additional-menu__link text text_regular"  target="_blank" rel="noopener noreferrer" href={OfferPdf}>Договор оферты</a>
 									</li>
 									<li className="additional-menu__item">
-									<a className="additional-menu__link text text_regular" href="">Политика конфиденциальности</a>
+									<a className="additional-menu__link text text_regular" rel="noopener noreferrer" target="_blank" href={PolicyPdf}>Политика конфиденциальности</a>
 									</li>
 									<li className="additional-menu__item">
 									<NavLink
@@ -31,7 +34,7 @@ const Footer = props => (
 					<section className="additional-menu main-footer__company">
 							<h3 className="additional-menu__title text text_semibold">Пользователям</h3>
 							<ul className="additional-menu__list">
-									<li className="additional-menu__item"><a className="additional-menu__link text text_regular" href="">Реквизиты компании</a></li>
+									<li className="additional-menu__item"><a className="additional-menu__link text text_regular" rel="noopener noreferrer" target="_blank" href={RequisitesPdf}>Реквизиты компании</a></li>
 							</ul>
 					</section><a className="contacts contacts_footer main-footer__contacts" href="tel:8800121212"><span className="contacts__content text text_regular">Наш номер телефона</span><span className="contacts__phone text text_semibold">8-800-123-12-12</span></a>
 			</section>
