@@ -8,60 +8,17 @@ import {NavLink} from 'react-router-dom'
 import Passenger from './Passengers/Passengers'
 import SityChoice from './SityChoice/SityChoice';
 import {connect} from 'react-redux'
-import { dataWay } from '../../store/actions/actions';
+import { dataWay, minusAdult, plusAdult, minusChild, plusChild } from '../../store/actions/searchTicket';
 
 class SearchTicket extends Component {
 
 state = {
-	passengerAdult: 1,
-	passengerChild: 0,
 	date: '',
 	valueFrom: '',
 	valueTo: '',
 }
 
-onClickMinusAdultHandler = (event) => {
-	event.preventDefault();
-	let passengerResult = this.state.passengerAdult - 1;
 
-	if(passengerResult < 1) {
-		passengerResult = 1;
-	}
-
-	this.setState({
-		passengerAdult: passengerResult,
-	})
-}
-
-onClickPlusAdultHandler = (event) => {
-	event.preventDefault();
-	let passengerResult = this.state.passengerAdult + 1;
-	
-	this.setState({
-		passengerAdult: passengerResult,
-	})
-}
-onClickMinusChildHandler = (event) => {
-	event.preventDefault();
-	let passengerResult = this.state.passengerChild - 1;
-
-	if(passengerResult < 0) {
-		passengerResult = 0;
-	}
-
-	this.setState({
-		passengerChild: passengerResult,
-	})
-}
-
-onClickPlusChildHandler = (event) => {
-	event.preventDefault();
-	let passengerResult = this.state.passengerChild + 1;
-	
-	this.setState({
-		passengerChild: passengerResult,
-	})
-}
 
 onClickChoiceFromSityHandler = (event) => {
 	const value = event.target.textContent;
@@ -96,7 +53,6 @@ onChangeSearchToHandler = (event) => {
 
 
 render() {
-	console.log(this.props)
 	
 
 	const { date } = this.state;
@@ -163,12 +119,13 @@ render() {
 			 />
 		</div>
 		<Passenger
-			passengerAdult = {this.state.passengerAdult}
-			passengerChild = {this.state.passengerChild}
-			onClickMinusAdultHandler = {this.onClickMinusAdultHandler}
-			onClickPlusAdultHandler = {this.onClickPlusAdultHandler}
-			onClickMinusChildHandler = {this.onClickMinusChildHandler}
-			onClickPlusChildHandler = {this.onClickPlusChildHandler}
+			passengerAdult = {this.props.searchTicket.passengerAdult}
+			passengerChild = {this.props.searchTicket.passengerChild}
+
+			onClickMinusAdultHandler = {this.props.onMinusAdult}
+			onClickPlusAdultHandler = {this.props.onPlusAdult}
+			onClickMinusChildHandler = {this.props.onMinusChild}
+			onClickPlusChildHandler = {this.props.onPlusChild}
 		/>
 		<p className="booking-form__container">
 
@@ -198,13 +155,17 @@ render() {
  
 function mapStateToProps(state) {
 	return {
-		booking: state.booking,
+		searchTicket: state.searchTicket,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onDataWay: () => dispatch(dataWay())
+		onDataWay: () => dispatch(dataWay()),
+		onMinusAdult: (event) => dispatch(minusAdult(event)),
+		onPlusAdult: (event) => dispatch(plusAdult(event)),
+		onMinusChild: (event) => dispatch(minusChild(event)),
+		onPlusChild: (event) => dispatch(plusChild(event))
 	}
 }
 

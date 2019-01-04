@@ -6,6 +6,7 @@ const initialState = {
 		boss: false,
 		thanks: false
 	},
+	
 }
 
 export default function mainPage(state = initialState, action) {
