@@ -1,4 +1,4 @@
-import { DATA_WAY, MINUS_ADULT, PLUS_ADULT, PLUS_CHILD, MINUS_CHILD } from "../actions/actionTypes";
+import { DATA_WAY, MINUS_ADULT, PLUS_ADULT, PLUS_CHILD, MINUS_CHILD, CHOICE_FROM, CHOICE_TO, SEARCH_TO, SEARCH_FROM, DATE_TICKET } from "../actions/actionTypes";
 
 
 const initialState = {
@@ -37,6 +37,26 @@ export default function searchTicket(state = initialState, action) {
 		case PLUS_CHILD:
 			return {
 				...state ,passengerChild: state.passengerChild + 1
+			}
+		case CHOICE_FROM:
+			return {
+				...state, valueFrom: action.value
+			}
+		case CHOICE_TO:
+			return {
+				...state, valueTo: action.value
+			}
+		case SEARCH_TO:
+			return {
+				...state, valueTo: action.value
+			}
+		case SEARCH_FROM:
+			return {
+				...state, valueFrom: action.value
+			}
+		case DATE_TICKET:
+			return {
+				...state, date: action.date
 			}
     default:
       return state 

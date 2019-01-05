@@ -3,62 +3,48 @@
 
 import React, {Component} from 'react';
 import Flatpickr from 'react-flatpickr';
-import { Russian } from "flatpickr/dist/l10n/ru.js"
-import {NavLink} from 'react-router-dom'
-import Passenger from './Passengers/Passengers'
+import { Russian } from "flatpickr/dist/l10n/ru.js";
+import {NavLink} from 'react-router-dom';
+import Passenger from './Passengers/Passengers';
 import SityChoice from './SityChoice/SityChoice';
 import {connect} from 'react-redux'
-import { dataWay, minusAdult, plusAdult, minusChild, plusChild } from '../../store/actions/searchTicket';
+import axios from 'axios';
+import { dataWay, minusAdult, plusAdult, minusChild, plusChild, ChoiceFromSity, ChoiceToSity, SearchFromSity, SearchToSity, dateTicket } from '../../store/actions/searchTicket';
 
 class SearchTicket extends Component {
 
-state = {
-	date: '',
-	valueFrom: '',
-	valueTo: '',
-}
+	state = {
+		destinationFrom: [],
+		destinationTo: []
+	}
 
+  async componentDidMount() {
+    try {
+			const response = await axios.get(`https://erp.evrotrans.net/search_reis_v2.php?target=1`);
+			const response2 = await axios.get(`https://erp.evrotrans.net/search_reis_v2.php?target=2`);
+			
+			
+			const destinationFrom = response.data.destination;
+			const destinationTo = response2.data.destination;
+			
 
-
-onClickChoiceFromSityHandler = (event) => {
-	const value = event.target.textContent;
-	this.setState({
-		valueFrom: value,
-	})
-}
-
-onClickChoiceToSityHandler = (event) => {
-	const value = event.target.textContent;
-	this.setState({
-		valueTo: value,
-	})
-}
-
-
-onChangeSearchFromHandler = (event) => {
-	const value = event.target.value;
-
-	this.setState({
-		valueFrom: value,
-	})
-}
-
-onChangeSearchToHandler = (event) => {
-	const value = event.target.value;
-
-	this.setState({
-		valueTo: value,
-	})
-}
+      this.setState({
+				destinationFrom,
+				destinationTo
+			})
+			
+    } catch (e) {
+      console.log(e)
+    }
+	}
 
 
 render() {
 	
 
-	const { date } = this.state;
+	const { date } = this.props.searchTicket;
 
-	const destinationFrom = this.props.destinationFrom;
-	const destinationTo = this.props.destinationTo;                       
+                 
 
 
 	function filterCity(destination ,searchText, maxResults) {
@@ -81,10 +67,10 @@ render() {
 				labelHtmlFor = {'from'}
 				inputIdName = {'from'}
 				inputPlaceholder = {'Город отправления'}
-				destination = { filterCity(destinationFrom,this.state.valueFrom, 20) }
-				valueInput = {this.state.valueFrom}
-				onClickChoiceSityHandler = {this.onClickChoiceFromSityHandler}
-				onChangeSearchHandler = {this.onChangeSearchFromHandler}
+				destination = { filterCity(this.state.destinationFrom,this.props.searchTicket.valueFrom, 20) }
+				valueInput = {this.props.searchTicket.valueFrom}
+				onClickChoiceSityHandler = {this.props.onChoiceFromSity}
+				onChangeSearchHandler = {this.props.onSearchFromSity}
 			/>
 	
 		</div>
@@ -95,10 +81,10 @@ render() {
 				labelHtmlFor = {'to'}
 				inputIdName = {'to'}
 				inputPlaceholder = {'Город прибытия'}
-				destination = { filterCity(destinationTo,this.state.valueTo, 20) }
-				valueInput = {this.state.valueTo}
-				onClickChoiceSityHandler = {this.onClickChoiceToSityHandler}
-				onChangeSearchHandler = {this.onChangeSearchToHandler}
+				destination = { filterCity(this.state.destinationTo,this.props.searchTicket.valueTo, 20) }
+				valueInput = {this.props.searchTicket.valueTo}
+				onClickChoiceSityHandler = {this.props.onChoiceToSity}
+				onChangeSearchHandler = {this.props.onSearchToSity}
 			/>
 		</div>
 		<div className="booking-form__container">
@@ -106,6 +92,7 @@ render() {
 				<Flatpickr 
 					required
 					className='booking-form__input booking-form__input_calendar text text_regular'
+					value={this.props.searchTicket.date}
 					placeholder="дд.мм.гггг"
 					options={{
 						enableTime: false,
@@ -115,7 +102,7 @@ render() {
 						allowInput:true,
 						minDate: "today" 
 					}}
-					onChange={date => { this.setState({date}) }}
+					onChange={date => this.props.onDateTicket(date)}
 			 />
 		</div>
 		<Passenger
@@ -129,7 +116,7 @@ render() {
 		/>
 		<p className="booking-form__container">
 
-			{	this.state.valueFrom !== '' && this.state.valueTo !== '' && this.state.date !== ''
+			{	this.props.searchTicket.valueFrom !== '' && this.props.searchTicket.valueTo !== '' && this.props.searchTicket.date !== ''
 			? <NavLink
 					to="/booking"
 					className="booking-form__button button button_theme_red text text_regular"
@@ -165,7 +152,12 @@ function mapDispatchToProps(dispatch) {
 		onMinusAdult: (event) => dispatch(minusAdult(event)),
 		onPlusAdult: (event) => dispatch(plusAdult(event)),
 		onMinusChild: (event) => dispatch(minusChild(event)),
-		onPlusChild: (event) => dispatch(plusChild(event))
+		onPlusChild: (event) => dispatch(plusChild(event)),
+		onChoiceFromSity: (event) => dispatch(ChoiceFromSity(event)),
+		onChoiceToSity: (event) => dispatch(ChoiceToSity(event)),
+		onSearchFromSity: (event) => dispatch(SearchFromSity(event)),
+		onSearchToSity: (event) => dispatch(SearchToSity(event)),
+		onDateTicket: (date) => dispatch(dateTicket(date)),
 	}
 }
 
