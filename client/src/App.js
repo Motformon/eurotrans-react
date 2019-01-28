@@ -13,7 +13,7 @@ class App extends Component {
 				<Route path="/booking" exact component={Booking} />
 				<Route path="/contacts" exact component={Contact}	/>
 				<Route path="/formation" exact component={Formation} />
-				<Redirect to="/" />
+				{/* <Redirect to="/" /> */}
 			</Switch>
     );
   }
