@@ -7,7 +7,7 @@ const initialState = {
 	date: '',
 	valueFrom: '',
 	valueTo: '',
-	// https://erp.evrotrans.net/search_reis.php?date_search=04-01-2019&place_start=%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D1%8B%D0%B9&place_end=%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%B5%D0%B6
+	routes: [],
 }
 
 export default function searchTicket(state = initialState, action) {
@@ -57,6 +57,10 @@ export default function searchTicket(state = initialState, action) {
 		case DATE_TICKET:
 			return {
 				...state, date: action.date
+			}
+		case DATA_WAY:
+			return {
+				...state, routes: action.routes
 			}
     default:
       return state 

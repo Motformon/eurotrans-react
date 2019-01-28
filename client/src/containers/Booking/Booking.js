@@ -4,48 +4,10 @@ import SearchTicket from '../../components/SearchTicket/SearchTicket';
 import {NavLink} from 'react-router-dom';
 import Footer from '../Footer/Footer'
 import { DATA_WAY } from '../../store/actions/actionTypes';
-import moment from 'moment'
-import axios from 'axios';
+
 class Booking extends Component {
-	state = {
-		routes: []
-	}
-
-	async componentDidMount() {
-		try {
-			const dateSearch = moment(this.props.searchTicket.date[0]).format('L');
-			const placeStart = this.props.searchTicket.valueFrom;
-			const placeEnd = this.props.searchTicket.valueTo;
-			// console.log(dateSearch, placeStart, placeEnd);
-
-
-			// const response = await axios.get(`https://erp.evrotrans.net/search_reis.php?date_search=01/05/2019&place_start=%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D1%8B%D0%B9&place_end=%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%B5%D0%B6`, config)
-		
-			const data = {
-				dateSearch,
-				placeStart,
-				placeEnd,
-			}
-
-			const str = JSON.stringify(data);
-			console.log(str, data);
-
-			const response = await axios({
-				method: 'post',
-				url: '/api/booking',
-				data: `result=${str}`
-			});
-	
-			console.log(response);
-			
-		} catch (e) {
-			console.log(e)
-		}
-	}
 
 	render() {
-
-
 
 		return (
 			<div>

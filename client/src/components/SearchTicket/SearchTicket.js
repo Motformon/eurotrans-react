@@ -45,8 +45,6 @@ render() {
 	const { date } = this.props.searchTicket;
 
                  
-
-
 	function filterCity(destination ,searchText, maxResults) {
 		return destination
 			.filter(city => {
@@ -120,7 +118,11 @@ render() {
 			? <NavLink
 					to="/booking"
 					className="booking-form__button button button_theme_red text text_regular"
-					onClick = {this.props.onDataWay}
+					onClick = {() => this.props.onDataWay(
+						this.props.searchTicket.date[0],
+						this.props.searchTicket.valueFrom,
+						this.props.searchTicket.valueTo
+					)}
 				>
 					Найти билеты
 				</NavLink>
@@ -148,7 +150,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onDataWay: () => dispatch(dataWay()),
+		onDataWay: (dateSearchData, placeStart, placeEnd) => dispatch(dataWay(dateSearchData, placeStart, placeEnd)),
 		onMinusAdult: (event) => dispatch(minusAdult(event)),
 		onPlusAdult: (event) => dispatch(plusAdult(event)),
 		onMinusChild: (event) => dispatch(minusChild(event)),
@@ -158,6 +160,7 @@ function mapDispatchToProps(dispatch) {
 		onSearchFromSity: (event) => dispatch(SearchFromSity(event)),
 		onSearchToSity: (event) => dispatch(SearchToSity(event)),
 		onDateTicket: (date) => dispatch(dateTicket(date)),
+		
 	}
 }
 
