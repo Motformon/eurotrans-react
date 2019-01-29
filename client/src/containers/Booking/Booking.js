@@ -66,64 +66,6 @@ class Booking extends Component {
 									</ul>
 								</React.Fragment>
 						}
-
-						{/* <? if(isset($message)): ?> */}
-						{/*	<h2 className="tickets__title text text_regular"><?= $message ?></h2>
-						<? else: ?>
-							<h2 className="tickets__title text text_regular">Все рейсы</h2>
-						<ul className="tickets__list">
-							<?foreach ($arTikets->routes as $routes)
-									{?>
-									<form action="formation.php" method="POST">
-											<li className="tickets__item ticket">
-													<div className="ticket__content">
-															<p className="ticket__time text text_regular">
-																	<span className="ticket__wrapper">
-																		<span className="ticket__departure">Время отправления</span>
-																		<span className="ticket__time-from"><?= $routes->time_start ?></span>
-																	</span>
-																	
-																		<span className="ticket__date"><?= $routes->date ?></span>
-																	<span className="ticket__time-full"><?= $routes->time_in_route ?></span>
-																	<span className="ticket__wrapper">
-																		<span className="ticket__arrival">Время прибытия</span>
-																		<span className="ticket__time-to"><?= $routes->time_end ?></span>
-
-																	</span>
-																	<span className="ticket__date"><?= $routes->date_end ?></span>
-															</p>
-															<p className="ticket__routes text text_regular">
-																	<?foreach ($routes->route as $key => $point)
-																	{
-																			if ($key == 0):?>
-																					<span className="ticket__station-from"><?= $routes->from  ?></span>
-																			<?else:?>
-																						<span className="ticket__station-from"><?= $point->locality?><!-- Время прибытия:-->
-				<!--                                      --><?//echo date("H:i:s", strtotime($routes->time_start) + (strtotime($point->time_to_station) - strtotime("00:00:00"))) . "\n";?>
-																						</span>
-																			<?endif;?>
-																	<?}?>
-															</p>
-													</div>
-													<div className="ticket__price">
-															<p className="ticket__order text text_regular">
-																	<?$price = ($routes->route[0]->price_from->adult * $adult)+($routes->route[0]->price_from->children * $children);?>
-																	<?=$price?> р.
-															</p>
-															<input type="hidden" name="id" value="<?= $routes->id ?>">
-															<input type="hidden" name="adult" value="<?= $adult ?>">
-															<input type="hidden" name="children" value="<?= $children ?>">
-															<input type="hidden" name="fullprice" value="<?= $price ?>">
-															<input type="hidden" name="to" value="<?= $routes->to ?>">
-															<input type="hidden" name="from" value="<?= $routes->from ?>">
-															<input type="submit" className="ticket__link button button_theme_red text text_regular" value="Купить билет">
-															</input>
-													</div>
-											</li>
-									</form>
-								<?}?>
-						</ul> */}
-						{/* <? endif ?> */}
 					</section>
 				</main>
 				<Footer/>
