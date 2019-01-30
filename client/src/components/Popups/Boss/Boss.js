@@ -1,10 +1,38 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {bossHide} from "../../../store/actions/actions";
+import axios from "axios"
 class Boss extends Component {
 
+state = {
+	data: {
+		name: 'test'
+	},
+	thanksModal: false
+}
+
+submitBossHandler = (e) => {
+	e.preventDefault();
+
+	const { data }= this.state;
+
+	const str = JSON.stringify(data);
+	
+	
+
+	axios.post('/api/send-boss', `result=${str}`)
+		.then((response) => {
+			console.log(response)
+
+			bossHide()	
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+}
+
 render() {
-console.log(this.props);
 	return (
 		<div className="popup-boss" >
 			<div 
@@ -21,14 +49,12 @@ console.log(this.props);
 					<input className='popup-boss__form-inf popup-boss__form-inf--phone' type="text" name="phone" placeholder="Ваш телефон" required/>
 					<input className='popup-boss__form-inf' type="email" name="email" placeholder="Ваш email" required/>
 					<textarea name="text" className='popup-boss__form-inf popup-boss__form-inf--textarea' placeholder='Текст обращения'></textarea>
-					<input className='popup-boss__button' type="submit" value="Отправить"/>
+					<input className='popup-boss__button' type="submit" value="Отправить" onClick={this.submitBossHandler}/>
 				</form>
 			</div>
 		</div>
 	)}
 };
-
-// export default Boss;
 
 
 function mapStateToProps(state) {
