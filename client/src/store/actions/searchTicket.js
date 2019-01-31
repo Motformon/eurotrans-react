@@ -13,16 +13,8 @@ export function dataWay(dateSearchData, placeStart, placeEnd) {
 				dateSearch,
 				placeStart,
 				placeEnd,
-			}
-
-			const str = JSON.stringify(data);
-			
-
-			const response = await axios({
-				method: 'post',
-				url: '/api/booking',
-				data: `result=${str}`
-			});
+			}			
+			const response = await axios.post('/api/booking',data);
 	
 			const routes = response.data;
 			dispatch({

@@ -5,10 +5,14 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.post("/api/booking", urlencodedParser , function (req, res) {
 	if(!req.body) return res.sendStatus(400);
 
-	const data = JSON.parse(req.body.result);
+	const data = req.body;
 
 	const uri = encodeURI(`https://erp.evrotrans.net/search_reis.php?date_search=${data.dateSearch}&place_start=${data.placeStart}&place_end=${data.placeEnd}`);
 
@@ -29,12 +33,10 @@ app.post("/api/booking", urlencodedParser , function (req, res) {
 
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
 
 app.post('/api/send-boss', urlencodedParser, (req, res) => {
-
-	const data = JSON.parse(req.body.result);
+	const data = req.body;
   // async..await is not allowed in global scope, must use a wrapper
 async function main(){
 

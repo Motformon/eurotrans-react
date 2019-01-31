@@ -16,11 +16,7 @@ submitBossHandler = (e) => {
 
 	const { data }= this.state;
 
-	const str = JSON.stringify(data);
-	
-	
-
-	axios.post('/api/send-boss', `result=${str}`)
+	axios.post('/api/send-boss', data)
 		.then((response) => {
 			console.log(response)
 

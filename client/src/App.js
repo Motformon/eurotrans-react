@@ -10,9 +10,9 @@ class App extends Component {
     return (
 			<Switch>
 				<Route path="/" exact component={MainPage} />
-				<Route path="/booking" exact component={Booking} />
-				<Route path="/contacts" exact component={Contact}	/>
-				<Route path="/formation" exact component={Formation} />
+				<Route path="/booking"  component={Booking} />
+				<Route path="/contacts"  component={Contact}	/>
+				<Route path="/formation"  component={Formation} />
 				{/* <Redirect to="/" /> */}
 			</Switch>
     );

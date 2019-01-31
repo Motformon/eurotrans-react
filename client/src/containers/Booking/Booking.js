@@ -58,7 +58,7 @@ class Booking extends Component {
 													</div>
 													<div className="ticket__price">
 															<p className="ticket__order text text_regular">{route.route[1].price_to.adult} р.</p>
-															<input type="submit" className="ticket__link button button_theme_red text text_regular" value="Купить билет"/>
+															<NavLink className="ticket__link button button_theme_red text text_regular" to={'/formation'}>Купить билет</NavLink>
 													</div>
 												</li>
 											)
